@@ -1,10 +1,19 @@
-package com.plurasight.week5.inheritance;
+package com.plurasight.week5.inheritance.exercise;
 
 public class Vehicles {
     private String color;
     private int numberOfPassengers;
     private int cargoCapacity;
     private int fuelCapacity;
+
+    public Vehicles(String color, int numberOfPassengers, int cargoCapacity, int fuelCapacity) {
+        this.color = color;
+        this.numberOfPassengers = numberOfPassengers;
+        this.cargoCapacity = cargoCapacity;
+        this.fuelCapacity = fuelCapacity;
+    }
+
+
 
 
     public String getColor() {
