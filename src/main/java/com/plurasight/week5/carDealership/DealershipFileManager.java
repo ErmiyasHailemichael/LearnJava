@@ -1,7 +1,9 @@
 package com.plurasight.week5.carDealership;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 public class DealershipFileManager {
     public Dealership getDealership() {
@@ -46,6 +48,33 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership) {
-        // Empty for now
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src/files/inventory.csv"));
+
+            // Write dealership info (line 1)
+            writer.write(dealership.getName() + "|" +
+                    dealership.getAddress() + "|" +
+                    dealership.getPhone());
+            writer.newLine();
+
+            // Write all vehicles (line 2+)
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+                writer.write(vehicle.getVin() + "|" +
+                        vehicle.getYear() + "|" +
+                        vehicle.getMake() + "|" +
+                        vehicle.getModel() + "|" +
+                        vehicle.getVehicleType() + "|" +
+                        vehicle.getColor() + "|" +
+                        vehicle.getOdometer() + "|" +
+                        vehicle.getPrice());
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (Exception e) {
+            System.out.println("Error saving file: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

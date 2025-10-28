@@ -5,15 +5,16 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Dealership dealership;
+    private Scanner scanner;
 
     public UserInterface() {
+        this.scanner = new Scanner(System.in);
         // Constructor - nothing needed here yet
     }
 
     public void display() {
         init();  // Load the dealership first
 
-        Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
@@ -106,36 +107,116 @@ public class UserInterface {
         displayVehicles(allVehicles);
     }
 
-    // Empty methods - we'll implement these later
+    /// search methods logics
     private void processGetByPriceRequest() {
-        // Will implement later
+        System.out.print("\nEnter minimum price: ");
+        double min = scanner.nextDouble();
+
+        System.out.print("Enter maximum price: ");
+        double max = scanner.nextDouble();
+        scanner.nextLine(); // Consume the newline
+
+        List<Vehicle> vehicles = dealership.getVehiclesByPrice(min, max);
+        displayVehicles(vehicles);
     }
 
     private void processGetByMakeModelRequest() {
-        // Will implement later
+        System.out.print("\nEnter the make: ");
+        String make = scanner.nextLine();
+
+        System.out.print("Enter the model: ");
+        String model = scanner.nextLine();
+
+        List<Vehicle> vehicles = dealership.getVehiclesByMakeModel(make, model);
+        displayVehicles(vehicles);
     }
 
     private void processGetByYearRequest() {
-        // Will implement later
+        System.out.print("\nEnter minimum year: ");
+        int min = scanner.nextInt();
+
+        System.out.print("Enter maximum year: ");
+        int max = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        List<Vehicle> vehicles = dealership.getVehiclesByYear(min, max);
+        displayVehicles(vehicles);
     }
 
     private void processGetByColorRequest() {
-        // Will implement later
+//        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nEnter the color: ");
+        String color = scanner.nextLine();
+
+        List<Vehicle> vehicles = dealership.getVehiclesByColor(color);
+        displayVehicles(vehicles);
     }
 
     private void processGetByMileageRequest() {
-        // Will implement later
+        System.out.print("\nEnter minimum mileage: ");
+        int min = scanner.nextInt();
+
+        System.out.print("Enter maximum mileage: ");
+        int max = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        List<Vehicle> vehicles = dealership.getVehiclesByMileage(min, max);
+        displayVehicles(vehicles);
     }
 
     private void processGetByVehicleTypeRequest() {
-        // Will implement later
+        System.out.print("\nEnter the vehicle type (car, truck, SUV, van): ");
+        String vehicleType = scanner.nextLine();
+
+        List<Vehicle> vehicles = dealership.getVehiclesByType(vehicleType);
+        displayVehicles(vehicles);
     }
 
     private void processAddVehicleRequest() {
-        // Will implement later
+        System.out.println("\n--- Add a New Vehicle ---");
+
+        System.out.print("Enter VIN: ");
+        int vin = scanner.nextInt();
+
+        System.out.print("Enter year: ");
+        int year = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        System.out.print("Enter make: ");
+        String make = scanner.nextLine();
+
+        System.out.print("Enter model: ");
+        String model = scanner.nextLine();
+
+        System.out.print("Enter vehicle type (car, truck, SUV, van): ");
+        String vehicleType = scanner.nextLine();
+
+        System.out.print("Enter color: ");
+        String color = scanner.nextLine();
+
+        System.out.print("Enter odometer reading: ");
+        int odometer = scanner.nextInt();
+
+        System.out.print("Enter price: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+
+        // Create the new vehicle
+        Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+
+        // Add it to the dealership
+        dealership.addVehicle(vehicle);
+
+        // ADD THESE TWO LINES:
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
+        System.out.println("\n✓ Vehicle added successfully!");
     }
 
     private void processRemoveVehicleRequest() {
         // Will implement later
     }
+
+
 }
