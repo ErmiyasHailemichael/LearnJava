@@ -24,4 +24,8 @@ public class Professor extends Wizard{
     public  String teachSpell(String spell){
         return "Professor " + getName() + " teaches you " + spell + " in " + subject + " class.";// struggling to get name and subject
     }
+    public String castSpell(String spell){
+        return "Professor " + getName() + " expertly casts " + spell + "!";
+
+    }
 }
