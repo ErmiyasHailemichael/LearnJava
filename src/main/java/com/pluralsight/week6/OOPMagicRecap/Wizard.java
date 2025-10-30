@@ -8,6 +8,12 @@ public class Wizard {
     private String wandType;
     private Wand wand;
 
+    public Wizard(String name, String house, int powerLevel) {
+        this.name = name;
+        this.house = house;
+        this.powerLevel = powerLevel;
+    }
+
     public Wand getWand() {
         return wand;
     }
