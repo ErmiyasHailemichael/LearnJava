@@ -41,7 +41,7 @@ public class BankAccount {
     }
     public void withdraw(double amount){
 
-        if (balance >= 0){
+        if (balance >= amount){
 //            double amount = 0;
             balance = balance - amount;
             System.out.println("You withdraw " + amount + " amount from your balance");
